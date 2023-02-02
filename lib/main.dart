@@ -1,54 +1,81 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:myapp/pages/Login_Page.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MaterialApp(
+      home: MyApp()
+      )
+      );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Colors.black,
-      ),
-      home: home(),
-    );
-  }
-
-  home() {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Deep Blaze'),
-        backgroundColor: Color.fromARGB(255, 15, 15, 15),
+      body: _body(),
+    );
+  }
+
+  // appBar: AppBar(
+  //   centerTitle: true,
+  //   title: Text('Deep Blaze'),
+  //   backgroundColor: Color.fromARGB(255, 15, 15, 15),
+  // ),
+
+  _body() {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Color.fromARGB(255, 29, 29, 29),
+            Color.fromARGB(255, 0, 0, 0)
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color.fromARGB(255, 29, 29, 29),
-              Color.fromARGB(255, 0, 0, 0)
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _img(),
             ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
           ),
-        ),
-        child: Center(
-          child: _img(),
-        ),
+          Center(
+              child: SizedBox(
+            child: _button('Login'),
+            width: 150,
+          )),
+          Center(
+              child: SizedBox(
+            child: _button('Cadastro'),
+            width: 150,
+          )),
+        ],
       ),
     );
   }
 
-  _button() {
+  _button(String text) {
     return TextButton(
       style: TextButton.styleFrom(
-          padding: EdgeInsets.symmetric(vertical: 5, horizontal: 25),
+          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 25),
           backgroundColor: Color.fromARGB(150, 9, 87, 70)),
-      child: _text(),
-      onPressed: () {},
+      child: _text(text),
+      onPressed: () => {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (BuildContext context) {
+          return Login();
+        }))
+      },
     );
   }
 
@@ -60,14 +87,14 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  _text() {
+  _text(String text1) {
     return Text(
-      'Login',
+      text1,
       style: TextStyle(
-          fontSize: 30,
+          fontSize: 20,
           color: Colors.white,
           //fontStyle: FontStyle.italic,
-          fontWeight: FontWeight.bold),
+          fontWeight: FontWeight.w400),
     );
   }
 }
@@ -126,3 +153,5 @@ class MyApp extends StatelessWidget {
               //   ),
               // ],
           //  child: Icon(Icons.toggle_off),
+    
+
