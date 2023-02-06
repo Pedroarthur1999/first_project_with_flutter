@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/pages/Login_Page.dart';
+import 'package:myapp/pages/Sign_in.dart';
 
 void main() {
-  runApp(MaterialApp(
-      home: MyApp()
-      )
-      );
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -51,12 +54,12 @@ class _MyAppState extends State<MyApp> {
           ),
           Center(
               child: SizedBox(
-            child: _button('Login'),
+            child: _button('Login', Login()),
             width: 150,
           )),
           Center(
               child: SizedBox(
-            child: _button('Cadastro'),
+            child: _button('Cadastro', SignIn()),
             width: 150,
           )),
         ],
@@ -64,18 +67,23 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  _button(String text) {
+  _button(String text, page) {
     return TextButton(
-      style: TextButton.styleFrom(
-          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 25),
-          backgroundColor: Color.fromARGB(150, 9, 87, 70)),
-      child: _text(text),
-      onPressed: () => {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (BuildContext context) {
-          return Login();
-        }))
-      },
+        style: TextButton.styleFrom(
+            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 25),
+            backgroundColor: Color.fromARGB(150, 9, 87, 70)),
+        child: _text(text),
+        onPressed: () => OnClickNavigator(page));
+  }
+
+  void OnClickNavigator(Widget page) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) {
+          return page;
+        },
+      ),
     );
   }
 
